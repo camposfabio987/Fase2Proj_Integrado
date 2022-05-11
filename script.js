@@ -6,14 +6,21 @@ var ctx = canvas.getContext('2d');
 var Largura = window.innerWidth
 var Altura = window.innerHeight
 var andar_nitaner = (Largura)*0.146
-var velocidade_nitaner = 5
-var andar_direita, andar_esquerda
+var velocidade_nitaner = 4
+var andar_direita = false
+var andar_esquerda =  false
+var andar_personagem = 0
+var velocidade_pers = 6
+var altura_personagem = (Altura)*0.342
 
   function ObjEst(){
   // CRIANDO OBJETOS ESTÁTICOS
+  
+  ctx.fillStyle = 'gray'; // COR DO NITANER
+  ctx.fillRect(andar_nitaner,(Altura)*0.837, (Largura)*0.036, (Altura)*0.076); //NITANER
 
   ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
-  ctx.fillRect(0, (Altura)*0.342, (Largura)*0.054, (Altura)*0.114); //PERSONAGEM PRINCIPAL
+  ctx.fillRect(andar_personagem, altura_personagem, (Largura)*0.054, (Altura)*0.114); //PERSONAGEM PRINCIPAL
 
   ctx.fillStyle = 'rgba(0,255,0,0.5)'; // COR DO CHÃO
   ctx.fillRect(0, (Altura)*0.913, (Largura), (Altura)*0.083); // CHÃO
@@ -36,26 +43,75 @@ var andar_direita, andar_esquerda
  
 
 
- function Nitaner() {
-  requestAnimationFrame(Nitaner)
-  
+ function CenarioAnimado() {
+
   ctx.clearRect(0, 0, innerWidth, innerHeight)
+  requestAnimationFrame(CenarioAnimado)
+  
+    if(( andar_nitaner + 200) > innerWidth) {
+    velocidade_nitaner = -velocidade_nitaner
+    }
+    else if (andar_nitaner<0){
+    velocidade_nitaner = -velocidade_nitaner
+    }
+    andar_nitaner=andar_nitaner+velocidade_nitaner;
+    
+
+    
+    if(andar_personagem > 245){
+      altura_personagem = 260
+      ctx.clearRect(0, 0, innerWidth, innerHeight)
+      ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+      ctx.fillRect(andar_personagem, altura_personagem, (Largura)*0.054, (Altura)*0.114); //PERSONAGEM PRINCIPAL
+
+    }
+
+    
+
+    if(andar_direita == true){
+    ctx.clearRect(0, 0, innerWidth, innerHeight)
+    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillRect(andar_personagem, altura_personagem, (Largura)*0.054, (Altura)*0.114); //PERSONAGEM PRINCIPAL
+    andar_personagem= andar_personagem+velocidade_pers;
+    
+  
+    }
+ 
+    
+      
+   if(andar_direita == false){
+    ctx.clearRect(0, 0, innerWidth, innerHeight)
+    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillRect(andar_personagem, altura_personagem, (Largura)*0.054, (Altura)*0.114); //PERSONAGEM PRINCIPAL
+
+  } 
+   
+  if(andar_esquerda == true){
+    ctx.clearRect(0, 0, innerWidth, innerHeight)
+    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillRect(andar_personagem, altura_personagem, (Largura)*0.054, (Altura)*0.114); //PERSONAGEM PRINCIPAL
+    andar_personagem= andar_personagem-velocidade_pers;
+    
+
+   }
+
+   
+   if(andar_esquerda == false){
+    ctx.clearRect(0, 0, innerWidth, innerHeight)
+    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillRect(andar_personagem, altura_personagem, (Largura)*0.054, (Altura)*0.114); //PERSONAGEM PRINCIPAL
+
+  } 
+
+  
 
   ObjEst()
 
-  ctx.fillStyle = 'gray'; // COR DO NITANER
-  ctx.fillRect(andar_nitaner, (Altura)*0.837, (Largura)*0.036, (Altura)*0.076); //NITANER
   
-  if(( andar_nitaner + 200) > innerWidth) {
-    velocidade_nitaner = -velocidade_nitaner
-   }
-   else if (andar_nitaner<0){
- velocidade_nitaner = -velocidade_nitaner
-   }
-   andar_nitaner=andar_nitaner+velocidade_nitaner;
  }
   
-Nitaner()
+CenarioAnimado() 
+
 
 
 document.addEventListener('keydown', BotaoDireita, false)
@@ -65,26 +121,26 @@ document.addEventListener('keydown', BotaoEsquerda, false)
 document.addEventListener('keyup', BotaoEsquerdaSolto, false)
 
 
-function BotaoDireita() {
+function BotaoDireita(e) {
   if (e.keyCode == 39) {
     andar_direita = true;
 }
 }
 
-function BotaoDireitaSolto() {
+function BotaoDireitaSolto(e) {
   if (e.keyCode == 39) {
     andar_direita = false;
 }
 }
 
-function BotaoEsquerda() {
+function BotaoEsquerda(e) {
   if (e.keyCode == 37) {
     andar_esquerda = true;
 
 }
 }
 
-function BotaoEsquerdaSolto() {
+function BotaoEsquerdaSolto(e) {
   if (e.keyCode == 37) {
     andar_esquerda = false;
 
