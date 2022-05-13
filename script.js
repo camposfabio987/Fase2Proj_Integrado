@@ -1,14 +1,21 @@
+// VARIÁVES CANVAS
+
 var canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var ctx = canvas.getContext('2d');
-
 var Largura = window.innerWidth
 var Altura = window.innerHeight
+
+// VARIÁVEIS NITANER 
 var andar_nitaner = (Largura) * 0.146
 var velocidade_nitaner = 4
+
+// VARIÁVEIS DO TECLADO 
 var andar_direita = false
 var andar_esquerda = false
+
+// VARIÁVEIS PERSONAGENS
 var andar_personagem = 0
 var velocidade_pers = 6
 var altura_personagem = (Altura) * 0.342
@@ -17,15 +24,12 @@ var lado_pers = (Largura) * 0.054
 function ObjEst() {
   // CRIANDO OBJETOS ESTÁTICOS
 
-  ctx.fillStyle = 'gray'; // COR DO NITANER
-  ctx.fillRect(andar_nitaner, (Altura) * 0.837, (Largura) * 0.036, (Altura) * 0.076); //NITANER
+  ctx.fillStyle = '#7b7bb7'; // COR DO NITANER
+  ctx.fillRect(andar_nitaner, (Altura) * 0.837, (Largura) * 0.036, (Altura) * 0.159); //NITANER
 
-  ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+  ctx.fillStyle = 'white'; // COR DO PERSONAGEM PRINCIPAL
   ctx.fillRect(andar_personagem, altura_personagem, lado_pers, (Altura) * 0.114); //PERSONAGEM PRINCIPAL
-
-  ctx.fillStyle = 'rgba(0,255,0,0.5)'; // COR DO CHÃO
-  ctx.fillRect(0, (Altura) * 0.913, (Largura), (Altura) * 0.083); // CHÃO
-
+  
   ctx.fillStyle = 'yellow'; // COR DO PRÉDIO 1
   ctx.fillRect(0, (Altura) * 0.456, (Largura) * 0.183, (Altura) * 0.030); //PRÉDIO 1 
 
@@ -43,15 +47,8 @@ function ObjEst() {
 }
 
 
-
+// FUNÇÃO QUE ANIMA QUALQUER COISA QUE ESTÁ NO CANVAS
 function CenarioAnimado() {
-
-  // if(((andar_personagem < 258 ) - lado_pers) && (altura_personagem-lado_pers <= 259) ){
-  //   andar_esquerda = false
-  // }
-
-  console.log(`Altura Personagem: ${altura_personagem} `)
-  console.log(`Andar personagem: ${andar_personagem} `)
 
   if ((andar_personagem < (Largura) * 0.182) && (parseInt(altura_personagem) == parseInt((Altura) * 0.395))) {
     andar_esquerda = false
@@ -71,21 +68,29 @@ function CenarioAnimado() {
   if (andar_personagem > (Largura) * 0.179) {
     altura_personagem = (Altura) * 0.395 // IMPORTANTE PARA COLOCAR A ALTURA DA PLATAFORMA VERMELHA
     ctx.clearRect(0, 0, innerWidth, innerHeight)
-    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillStyle = 'white'; // COR DO PERSONAGEM PRINCIPAL
     ctx.fillRect(andar_personagem, altura_personagem, (Largura) * 0.054, (Altura) * 0.114); //PERSONAGEM PRINCIPAL
 
   }
 
+  
   if (andar_personagem > (Largura) * 0.292) {
     altura_personagem = (Altura) * 0.266
   }
 
+  if(andar_personagem > (Largura)* 0.497){
+    altura_personagem = (Altura)* 0.494
+  
+  }
+
+
   if (andar_direita == true) {
     ctx.clearRect(0, 0, innerWidth, innerHeight)
-    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillStyle = 'white'; // COR DO PERSONAGEM PRINCIPAL
     ctx.fillRect(andar_personagem, altura_personagem, (Largura) * 0.054, (Altura) * 0.114); //PERSONAGEM PRINCIPAL
     andar_personagem = andar_personagem + velocidade_pers;
-
+    console.log(andar_personagem)
+    console.log(altura_personagem)
 
 
   }
@@ -94,24 +99,25 @@ function CenarioAnimado() {
 
   if (andar_direita == false) {
     ctx.clearRect(0, 0, innerWidth, innerHeight)
-    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillStyle = 'white'; // COR DO PERSONAGEM PRINCIPAL
     ctx.fillRect(andar_personagem, altura_personagem, (Largura) * 0.054, (Altura) * 0.114); //PERSONAGEM PRINCIPAL
 
   }
 
   if (andar_esquerda == true) {
     ctx.clearRect(0, 0, innerWidth, innerHeight)
-    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillStyle = 'white'; // COR DO PERSONAGEM PRINCIPAL
     ctx.fillRect(andar_personagem, altura_personagem, (Largura) * 0.054, (Altura) * 0.114); //PERSONAGEM PRINCIPAL
     andar_personagem = andar_personagem - velocidade_pers;
-
+    console.log(andar_personagem)
+    console.log(altura_personagem)
 
   }
 
 
   if (andar_esquerda == false) {
     ctx.clearRect(0, 0, innerWidth, innerHeight)
-    ctx.fillStyle = 'blue'; // COR DO PERSONAGEM PRINCIPAL
+    ctx.fillStyle = 'white'; // COR DO PERSONAGEM PRINCIPAL
     ctx.fillRect(andar_personagem, altura_personagem, (Largura) * 0.054, (Altura) * 0.114); //PERSONAGEM PRINCIPAL
 
 
@@ -127,7 +133,7 @@ function CenarioAnimado() {
 CenarioAnimado()
 
 
-
+// COMANDOS QUE HABILITAM AS SETAS DIREITA E ESQUERDA
 document.addEventListener('keydown', BotaoDireita, false)
 document.addEventListener('keyup', BotaoDireitaSolto, false)
 
