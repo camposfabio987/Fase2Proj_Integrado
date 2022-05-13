@@ -29,7 +29,7 @@ function ObjEst() {
 
   ctx.fillStyle = 'white'; // COR DO PERSONAGEM PRINCIPAL
   ctx.fillRect(andar_personagem, altura_personagem, lado_pers, (Altura) * 0.114); //PERSONAGEM PRINCIPAL
-  
+
   ctx.fillStyle = 'yellow'; // COR DO PRÉDIO 1
   ctx.fillRect(0, (Altura) * 0.456, (Largura) * 0.183, (Altura) * 0.030); //PRÉDIO 1 
 
@@ -109,8 +109,6 @@ function CenarioAnimado() {
     ctx.fillStyle = 'white'; // COR DO PERSONAGEM PRINCIPAL
     ctx.fillRect(andar_personagem, altura_personagem, (Largura) * 0.054, (Altura) * 0.114); //PERSONAGEM PRINCIPAL
     andar_personagem = andar_personagem - velocidade_pers;
-    console.log(andar_personagem)
-    console.log(altura_personagem)
 
   }
 
